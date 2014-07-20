@@ -8,14 +8,11 @@
   (rand-int 255))
 
 (defn make-square [x y size]
-  (stroke-weight 1)
-
+  (stroke-weight 0)
   (no-stroke)
-  (let [a (rand-int 255)]
-    ;(stroke a)
-    (apply fill [(ri) (ri) (ri) 132]))
-  (if (and (> (rand) 0.3) (> size 2))
-    (let [steps 3 half-size (int (/ size steps))]
+  (apply fill [(ri) (ri) (ri) 232])
+  (if (and (> (rand) 0.3) (> size 4))
+    (let [steps 2 half-size (int (/ size steps))]
       (doseq [ax (map int (range x (+ x size) (/ size steps)))
               ay (map int (range y (+ y size) (/ size steps)))]
         (make-square ax ay half-size)))
@@ -23,6 +20,7 @@
 
 (defn draw []
   (frame-rate 0.5)
+  (no-stroke)
   (background 0)
   (let [size 128 height 640 width 640]
     (doseq [x (range 0 height size) y (range 0 width size)]
