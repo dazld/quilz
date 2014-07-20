@@ -68,8 +68,12 @@
     ))
 
 (defn vertex-shared [t1 t2]
-
-  )
+  (reduce (fn []
+  (let [shared (atom 0)]
+    (doseq [[k1 v1] t1 [k2 v2] t2]
+      (println k1 v1 k2 v2)
+      (println (= k1 k2)) 
+      )))
 
 
 (defn draw []
@@ -82,6 +86,7 @@
         stri (supertri pts)]
     (doseq [x pts] (draw-point x))
     (println (contains-point stri (first pts)))
+    (println (vertex-shared stri stri))
     ))
 
 
