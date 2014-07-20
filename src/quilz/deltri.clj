@@ -68,12 +68,8 @@
     ))
 
 (defn vertex-shared [t1 t2]
-  (reduce (fn []
-  (let [shared (atom 0)]
-    (doseq [[k1 v1] t1 [k2 v2] t2]
-      (println k1 v1 k2 v2)
-      (println (= k1 k2)) 
-      )))
+  (let [compared (for [[k v] t1 [k1 v1] t2] (do (= v v1)))]
+    (reduce (fn [save val] (if val (reduced true) false)) compared)))
 
 
 (defn draw []
