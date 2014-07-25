@@ -71,6 +71,21 @@
   (let [compared (for [[k v] t1 [k1 v1] t2] (do (= v v1)))]
     (reduce (fn [save val] (if val (reduced true) false)) compared)))
 
+(defn process-points [pts stri]
+  (let [tris (atom [stri])]
+    (reduce (fn [save p]
+              (let [buffer (atom [])]
+                (doseq [t (reverse @tris)] 
+                  (if (contains-point t p)
+                    t)) 
+
+                )) [] pts )))
+
+
+(defn deltri [pts]
+  (if (< (count pts) 3)
+    (throw "too few points"))
+  (let [ ]))
 
 (defn draw []
   (q/background 200)
@@ -78,11 +93,12 @@
   (q/frame-rate 0.5)
   (let [w (q/width)
         h (q/height)
-        pts (points 6 w h)
+        pts (points 3 w h)
         stri (supertri pts)]
     (doseq [x pts] (draw-point x))
-    (println (contains-point stri (first pts)))
-    (println (vertex-shared stri stri))
+    (process-points pts stri)
+    ;(println (contains-point stri (first pts)))
+    ;(println (vertex-shared stri stri))
     ))
 
 
