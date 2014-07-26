@@ -2,6 +2,8 @@
   (:require [quil.core :as q] ))
 
 (def num-points 100)
+(def epsilon 1e-3)
+
 
 (defstruct tri :v1 :v2 :v3)
 (defstruct point :x :y :z)
